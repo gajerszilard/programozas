@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2016 by gajerszilard (http://jsbin.com/qozuwu/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+<meta name="description" content="Színváltó óra">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
+  <title>Color Clock</title>
+<style id="jsbin-css">
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+#clock {
+  text-align: center;
+  position: relative;
+  top: 50%;
+  font-size: 40px;
+  margin-top: -20px;
+  font-family: 'Space Mono', monospace;
+  color: #fff;
+}
+</style>
+</head>
+<body>
+  <div id="clock">12:13:14</div>
+  <div id="red">Red: </div>
+<script id="jsbin-javascript">
+function colorClock() {
+  var date = new Date();
+
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var seconds = date.getSeconds();
+
+  if (hours <= 9) {
+    hours = '0' + hours;
+  }
+
+  if (minutes <= 9) {
+    minutes = '0' + minutes;
+  }
+
+  if (seconds <= 9) {
+    seconds = '0' + seconds;
+  }
+  
+  var r = Math.round(Math.random() * 50 * hours);
+  var g = Math.round(Math.random() * 10 * minutes);
+  var b = Math.round(Math.random() * 10 * seconds);
+  
+  if (r > 255) {
+    r = r - 255;
+  }
+  
+  if (g > 255) {
+    g = g - 255;
+  }
+  
+  if (b > 255) {
+    b = b - 255;
+  }
+  
+  var rg = r + g;
+  var gb = g + b;
+  var rb = r + b;
+  
+  if (rg > 255 || gb > 255 || rb > 255) {
+    clock.style.color = 'black';
+  } else {
+    clock.style.color = 'white';
+  }
+  
+ 
+  
+  var color = 'rgb(' + r + ',' + g + ',' + b + ')';
+  var clockFace = hours + ':' + minutes + ':' + seconds;
+
+  document.getElementById('clock').innerHTML = clockFace;
+  document.getElementById('red').innerHTML = 'red: ' + r + ' green: ' + g + ' blue: ' + b;
+  clock.style.background = color;
+  
+  setTimeout(function(){ 
+    colorClock();
+  }, 1000);
+
+}
+
+colorClock();
+</script>
+</body>
+</html>
